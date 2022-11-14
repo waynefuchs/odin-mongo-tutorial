@@ -11,6 +11,7 @@ var usersRouter = require('./routes/users');
 console.log(`My app is called: ${process.env.NAME}`);
 
 var app = express();
+require('./database.js')();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
