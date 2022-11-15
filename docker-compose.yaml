@@ -1,0 +1,34 @@
+version: "3.9"
+
+services:
+  # MongoDB service
+  mongo_db:
+    container_name: db_container
+    image: mongo:latest
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - mongo_db:/data/db
+
+  # Node.js API service
+
+  # api:
+  #   build: .
+  #   ports:
+  #     - 4567:3000
+  #   # If you want to develop inside of a docker
+  #   # Map the local directory to /usr/src/app in the container
+  #   #  volumes:
+  #   #    - .:/usr/src/app
+  #   environment:
+  #     PORT: 3000
+  #     MONGODB_URI: mongodb://mongo_db:27017
+  #     DB_NAME: my_db
+  #     NAME: "Some Name"
+  #   depends_on:
+  #     - mongo_db
+
+# Data persistence
+volumes:
+  mongo_db: {}
