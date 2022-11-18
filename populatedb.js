@@ -2,6 +2,8 @@
 
 console.log('This script populates some test books, authors, genres and bookinstances to your database. Specified database as argument - e.g.: populatedb mongodb+srv://cooluser:coolpassword@cluster0.a9azn.mongodb.net/local_library?retryWrites=true');
 
+require("dotenv").config();
+
 // Get arguments passed on command line
 var userArgs = process.argv.slice(2);
 /*
@@ -18,8 +20,16 @@ var BookInstance = require('./models/bookinstance.model')
 
 
 var mongoose = require('mongoose');
-var mongoDB = userArgs[0];
-mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true});
+// var mongoDB = userArgs[0];
+// mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(process.env.MONGODB_URI, {
+  dbName: process.env.DB_NAME,
+  user: process.env.DB_USER,
+  pass: process.env.DB_PASS,
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  connectTimeoutMS: 1000,
+});
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));

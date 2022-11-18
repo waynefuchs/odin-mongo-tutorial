@@ -7,7 +7,8 @@ module.exports = () => {
       user: process.env.DB_USER,
       pass: process.env.DB_PASS,
       useNewUrlParser: true,
-      useUnifiedTopology: true
+      useUnifiedTopology: true,
+      connectTimeoutMS: 1000,
     })
     .then(() => {
       console.log('Mongodb connected....');
@@ -17,6 +18,11 @@ module.exports = () => {
   mongoose.connection.on('connected', () => {
     console.log('Mongoose connected to db...');
   });
+
+  mongoose.connection.on('reconnected', () => {
+    console.log('Mongoose connection reconnected...');
+  });
+
 
   mongoose.connection.on('error', err => {
     console.error(err.message);

@@ -4,7 +4,7 @@ exports.genre_list = (req, res) => {
   res.send("NOT IMPLEMENTED: Genre list");
 };
 
-exports_genre_detail = (req, res) => {
+exports.genre_detail = (req, res) => {
   res.send(`NOT IMPLEMENTED: Genre detail ${req.params.id}`);
 };
 

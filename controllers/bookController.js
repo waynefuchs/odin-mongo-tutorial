@@ -1,8 +1,40 @@
+// models
 const Book = require("../models/book.model");
-const { update } = require("../models/genre.model");
+const Author = require("../models/author.model");
+const Genre = require("../models/genre.model");
+const BookInstance = require("../models/bookinstance.model");
+
+// npm modules
+const async = require("async");
 
 exports.index = (req, res) => {
-  res.send("NOT IMPLEMENTED: Site Home Page");
+  //   res.send("NOT IMPLEMENTED: Site Home Page");
+  async.parallel(
+    {
+      book_count(callback) {
+        Book.countDocuments({}, callback);
+      },
+      book_instance_count(callback) {
+        BookInstance.countDocuments({}, callback);
+      },
+      book_instance_available_count(callback) {
+        BookInstance.countDocuments({ status: "Available" }, callback);
+      },
+      author_count(callback) {
+        Author.countDocuments({}, callback);
+      },
+      genre_count(callback) {
+        Genre.countDocuments({}, callback);
+      },
+    },
+    (err, results) => {
+      res.render("index", {
+        title: "Local Library Home",
+        error: err,
+        data: results,
+      });
+    }
+  );
 };
 
 exports.book_list = (req, res) => {
