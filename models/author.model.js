@@ -21,9 +21,11 @@ const AuthorSchema = new Schema({
   },
 });
 
-AuthorSchema.virtual("name").get(() =>
-  [this.family_name.trim(), this.first_name.trim()].filter((v) => v).join(", ")
-);
+AuthorSchema.virtual("name").get(function () {
+  return [this.family_name.trim(), this.first_name.trim()]
+    .filter((v) => v)
+    .join(", ");
+});
 
 AuthorSchema.virtual("url").get(function () {
   return `/catalog/author/${this._id}`;
