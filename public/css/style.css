@@ -7,9 +7,31 @@ a {
   color: #00B7FF;
 } */
 
+body {
+  background-color: #222222;
+  color: #dddddd;
+}
+
+a,
+a:visited {
+  padding: 10px;
+  color: #00B7FF;
+}
+
+a:hover {
+  color: #0077cc;
+}
+
+span {
+  padding: 20px;
+}
 
 .sidebar-nav {
   margin-top: 20px;
   padding: 0;
   list-style: none;
+}
+
+.sidebar-nav a {
+  padding: 0px;
 }
